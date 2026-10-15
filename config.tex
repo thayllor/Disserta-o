@@ -1,0 +1,43 @@
+% Pacotes
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{titlesec}
+\usepackage{titletoc} % Para formatar listas
+\usepackage{helvet}   % Arial
+\usepackage{times}    % Times New Roman
+\usepackage{tocloft}  % Para formatar sumário, lista de figuras/tabelas
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+% Comando personalizado para citação no formato "Autor (ano)".
+% Usa \textcite quando disponível (biblatex); caso contrário, usa \citeauthor (ano).
+% Evita produzir parênteses duplicados porque \textcite já formata corretamente
+% no estilo bibliográfico; o fallback monta manualmente "Autor (ano)".
+\providecommand{\citeautor}[1]{}
+% Use \textcite provided by biblatex to get the format "Autor (ano)".
+% This relies on biblatex being loaded (it is in the preamble). If for any
+% reason \textcite is unavailable, the user can change this to the fallback
+% form, but in our setup \textcite prints the desired output reliably.
+\renewcommand{\citeautor}[1]{\textcite{#1}}
+% ===== Fonte padrão do texto =====
+\renewcommand{\rmdefault}{ptm} % Times New Roman
+
+% ===== Formatação dos Capítulos =====
+\titleformat{\chapter}[hang]
+  {\normalfont\bfseries\fontsize{12}{14}\selectfont}
+  {\thechapter.}{1em}{}
+
+\titlespacing*{\chapter}{0pt}{-10pt}{20pt}
+
+% ===== Formatação dos títulos das listas (Sumário, Figuras, Tabelas) =====
+\renewcommand{\cfttoctitlefont}{\fontfamily{phv}\selectfont\fontsize{16}{18}\bfseries} % Sumário
+\renewcommand{\cftloftitlefont}{\fontfamily{phv}\selectfont\fontsize{16}{18}\bfseries} % Lista de figuras
+\renewcommand{\cftlottitlefont}{\fontfamily{phv}\selectfont\fontsize{16}{18}\bfseries} % Lista de tabelas
+
+
+% ===== Espaçamento =====
+\linespread{1.5}

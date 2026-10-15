@@ -1,0 +1,92 @@
+\documentclass[a4paper,12pt]{report}
+\input{config}
+\usepackage[backend=biber, style=abnt]{biblatex}
+\usepackage{pdflscape}
+% \usepackage[webp]{graphicx}
+\usepackage{rotating}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{longtable}
+\usepackage{changepage}
+\usepackage{array}
+\usepackage{marginnote}
+\usepackage{todonotes}
+\usepackage{xcolor}
+\usepackage{pgfgantt}
+\usepackage{booktabs}
+\usepackage{graphicx}
+
+
+\renewcommand*{\raggedleftmarginnote}{}
+
+\usepackage{float} % se quiser usar [H] para fixar posição
+\usepackage{pdfpages} % Para incluir PDFs
+
+\setlength{\marginparwidth}{3.2cm}   % largura da caixa
+%\setlength{\marginparsep}{8pt}     % espaço entre a margem e a caixa
+
+\addbibresource{Ref.bib}
+\AtEveryBibitem{\clearfield{note}}
+
+% Início do documento
+\begin{document}
+
+% ---- CAPA SEM NUMERAÇÃO ----
+\pagenumbering{gobble} % Remove a numeração da capa
+\input{Inicial/Capa}           % Insere o arquivo capa.tex
+
+\cleardoublepage
+\pagenumbering{arabic} % Numeração em arábico (1, 2, 3...)
+\setcounter{page}{2}   % Começa da página 2 (ou qualquer outro número desejado)
+
+% ---- INÍCIO DA NUMERAÇÃO ----
+\input{Inicial/Rosto}
+%\todo{queria deixar a dedicatória e agradecimento pra colocar só trabalho final, é mau visto isso?}
+\input{Inicial/Dedicatoria}    % Insere o arquivo dedicatoria.tex
+\input{Inicial/Agradecimento}
+\input{Inicial/Resumo}
+\input{Inicial/Abstract}
+
+\clearpage  % Força uma nova página
+% ---- SUMÁRIO (opcional) ----
+\tableofcontents
+\cleardoublepage
+\input{Inicial/Listas}
+
+% ---- CAPÍTULOS ----
+\input{Capitulos/Introdução}
+\input{Capitulos/Embasamento}
+\input{Capitulos/Revisao}
+\input{Capitulos/Metodologia}
+\input{Capitulos/Resultados.tex}
+\input{Capitulos/Conclusão.tex}
+%\input{Capitulos/Cronograma}
+
+% ---- APÊNDICES ----
+\appendix
+% ---- APÊNDICES ----
+\addcontentsline{toc}{chapter}{APÊNDICES}
+% Inclui TCLE (Termo de Consentimento)
+\IfFileExists{apendices/TCLE.pdf}{%
+  \includepdf[pages=-,addtotoc={1,chapter,1,{Termo de Consentimento Livre e Esclarecido},tcle}]{./apendices/TCLE.pdf}%
+}{%
+  	ypeout{Warning: apendices/TCLE.pdf not found; skipping TCLE.pdf inclusion.}%
+}
+
+% Inclui IHS (instrumento/arquivo adicional)
+\IfFileExists{apendices/IHS.pdf}{%
+  \includepdf[pages=-,addtotoc={1,chapter,2,{Inventário de Habilidades Sociais},ihs}]{./apendices/IHS.pdf}%
+}{%
+  	ypeout{Warning: apendices/IHS.pdf not found; skipping IHS.pdf inclusion.}%
+}
+
+% Inclui TEIQue-SF (questionário TEIQue-SF)
+\IfFileExists{apendices/TEIQue-SF.pdf}{%
+  \includepdf[pages=-,addtotoc={1,chapter,3,{Trait and Emotional Intelligence Questionnaire Short Form},teique}]{./apendices/TEIQue-SF.pdf}%
+}{%
+  	ypeout{Warning: apendices/TEIQue-SF.pdf not found; skipping TEIQue-SF.pdf inclusion.}%
+}
+
+% E assim por diante...
+\printbibliography
+\end{document}
