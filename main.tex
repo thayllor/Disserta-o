@@ -21,6 +21,8 @@
 
 \usepackage{float} % se quiser usar [H] para fixar posição
 \usepackage{pdfpages} % Para incluir PDFs
+\usepackage{attachfile2} % Para anexar arquivos ao PDF final
+\definecolor{appendixblue}{HTML}{0066CC}
 
 \setlength{\marginparwidth}{3.2cm}   % largura da caixa
 %\setlength{\marginparsep}{8pt}     % espaço entre a margem e a caixa
@@ -41,7 +43,6 @@
 
 % ---- INÍCIO DA NUMERAÇÃO ----
 \input{Inicial/Rosto}
-%\todo{queria deixar a dedicatória e agradecimento pra colocar só trabalho final, é mau visto isso?}
 \input{Inicial/Dedicatoria}    % Insere o arquivo dedicatoria.tex
 \input{Inicial/Agradecimento}
 \input{Inicial/Resumo}
@@ -80,13 +81,43 @@
   	ypeout{Warning: apendices/IHS.pdf not found; skipping IHS.pdf inclusion.}%
 }
 
-% Inclui TEIQue-SF (questionário TEIQue-SF)
-\IfFileExists{apendices/TEIQue-SF.pdf}{%
-  \includepdf[pages=-,addtotoc={1,chapter,3,{Trait and Emotional Intelligence Questionnaire Short Form},teique}]{./apendices/TEIQue-SF.pdf}%
+% Anexa os scripts de análise R
+\chapter{Scripts de Análise}
+\IfFileExists{\detokenize{apendices/scripts/Analize qualitativa/Analise_qualitativa.R}}{%
+	\noindent\textattachfile[description={Script de análise qualitativa}]{\detokenize{apendices/scripts/Analize qualitativa/Analise_qualitativa.R}}{\textcolor{appendixblue}{Baixar Analise\_qualitativa.R}}\par
 }{%
-  	ypeout{Warning: apendices/TEIQue-SF.pdf not found; skipping TEIQue-SF.pdf inclusion.}%
+	\typeout{Warning: script Analise_qualitativa.R not found; skipping attachment.}%
+}
+\IfFileExists{\detokenize{apendices/scripts/Analise estatistica/Analise_estatistica.R}}{%
+	\noindent\textattachfile[description={Script de análise estatística}]{\detokenize{apendices/scripts/Analise estatistica/Analise_estatistica.R}}{\textcolor{appendixblue}{Baixar Analise\_estatistica.R}}\par
+}{%
+	\typeout{Warning: script Analise_estatistica.R not found; skipping attachment.}%
 }
 
+% Anexa as planilhas atuais
+\chapter{Tabelas e Dados Complementares}
+\IfFileExists{\detokenize{apendices/tabelas/Questionario pre experimento.xlsx}}{%
+	\noindent\textattachfile[description={Questionário pré-experimento}]{\detokenize{apendices/tabelas/Questionario pre experimento.xlsx}}{\textcolor{appendixblue}{Baixar Questionario pre experimento.xlsx}}\par
+}{%
+	\typeout{Warning: Questionario pre experimento.xlsx not found; skipping attachment.}%
+}
+\IfFileExists{\detokenize{apendices/tabelas/Questionário pos experimento versão controle.xlsx}}{%
+	\noindent\textattachfile[description={Questionário pós-experimento do grupo controle}]{\detokenize{apendices/tabelas/Questionário pos experimento versão controle.xlsx}}{\textcolor{appendixblue}{Baixar Questionário pos experimento versão controle.xlsx}}\par
+}{%
+	\typeout{Warning: Questionário pos experimento versão controle.xlsx not found; skipping attachment.}%
+}
+\IfFileExists{\detokenize{apendices/tabelas/Questionário pos experimento versão experimental.xlsx}}{%
+	\noindent\textattachfile[description={Questionário pós-experimento do grupo experimental}]{\detokenize{apendices/tabelas/Questionário pos experimento versão experimental.xlsx}}{\textcolor{appendixblue}{Baixar Questionário pos experimento versão experimental.xlsx}}\par
+}{%
+	\typeout{Warning: Questionário pos experimento versão experimental.xlsx not found; skipping attachment.}%
+}
+% Inclui TEIQue-SF (questionário TEIQue-SF)
+%\IfFileExists{apendices/TEIQue-SF.pdf}{%
+ % \includepdf[pages=-,addtotoc={1,chapter,3,{Trait and Emotional Intelligence Questionnaire Short Form},teique}]{./apendices/TEIQue-SF.pdf}%
+%}{%
+%  	ypeout{Warning: apendices/TEIQue-SF.pdf not found; skipping TEIQue-SF.pdf inclusion.}%
+%}
+%\todo[inline]{precisa de dois apêndices - o do questionario de perfil, completo para o entendimento da analise descritiva, e o que vc fala sobre os scripts no R e na python}
 % E assim por diante...
 \printbibliography
 \end{document}
